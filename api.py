@@ -2,7 +2,9 @@ from flask import Flask
 import os
 
 app = Flask(__name__)
-	
+
+print(os.environ['HOME'])
+
 @app.route('/<pinValue>', methods=['POST'])
 def set_pin_value(pinValue):
 	print(type(pinValue))

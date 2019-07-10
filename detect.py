@@ -8,6 +8,8 @@ default_pinValue = 0
 
 grovepi.pinMode(led,"OUTPUT")
 
+print(os.environ['HOME'])
+
 def flash_led(count, duration):
 	for x in range(1, count):
 		set_led_value(255)
