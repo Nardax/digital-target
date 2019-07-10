@@ -14,8 +14,9 @@ def create_connection(db_file):
                                         Value integer NOT NULL
                                     ); """)
 
+        pinValue = (5, 255)
         c.execute(""" INSERT INTO PinValue(Id,Value)
-              VALUES(?,?) """, 5, 0)
+              VALUES(?,?) """, pinValue)
     except Error as e:
         print(e)
     finally:
