@@ -9,7 +9,7 @@ default_pinValue = 0
 grovepi.pinMode(led,"OUTPUT")
 
 print(os.environ['HOME'])
-print(os.environ['PIN_VALUE'])
+print(os.getenv('PIN_VALUE', default_pinValue))
 
 def flash_led(count, duration):
 	for x in range(1, count):
@@ -24,7 +24,7 @@ def set_led_value(value):
 def detect_hit():
 	while True:
 		pinValue = os.getenv('PIN_VALUE', default_pinValue)
-		print(os.environ['PIN_VALUE'])
+		print(pinValue)
 		set_led_value(pinValue)
 		if pinValue == 255:
 			distance = grovepi.ultrasonicRead(sensor)
