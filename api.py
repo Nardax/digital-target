@@ -9,6 +9,7 @@ print(os.environ['HOME'])
 def set_pin_value(pinValue):
 	print(type(pinValue))
 	os.environ['PIN_VALUE'] = pinValue
+	print(os.getenv('PIN_VALUE', 123))
 	return pinValue
 
 app.run(host='0.0.0.0')
