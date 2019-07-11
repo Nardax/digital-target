@@ -28,7 +28,7 @@ def set_led_value(newValue):
 def get_led_value():
 	try:
 		c = conn.cursor()
-		c.execute("SELECT [Value] FROM PinValue WHERE Id=?;", (led))
+		c.execute("SELECT [Value] FROM PinValue WHERE Id=?;", (led,))
 		result = c.fetchone()
 		return result[0]
 	except Error as e:
