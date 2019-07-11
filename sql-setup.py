@@ -11,11 +11,11 @@ def create_connection(db_file):
         c = conn.cursor()
         c.execute(""" CREATE TABLE IF NOT EXISTS PinValue (
                                         Id integer PRIMARY KEY,
-                                        Value integer NOT NULL
+                                        [Value] integer NOT NULL
                                     ); """)
 
         pinValue = (5, 255)
-        c.execute(""" INSERT INTO PinValue(Id,Value)
+        c.execute(""" INSERT INTO PinValue(Id, [Value])
               VALUES(?,?) """, pinValue)
     except Error as e:
         print(e)

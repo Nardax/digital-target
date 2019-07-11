@@ -1,15 +1,14 @@
 import grovepi
 import time
-import os
+import sqlite3
+from sqlite3 import Error
 
 led = 5 
 sensor = 4
-default_pinValue = 0
+currentLedValue = 0
 
 grovepi.pinMode(led,"OUTPUT")
-
-print(os.environ['HOME'])
-print(os.getenv('PIN_VALUE', default_pinValue))
+conn = sqlite3.connect("data.db")
 
 def flash_led(count, duration):
 	for x in range(1, count):
@@ -21,20 +20,29 @@ def flash_led(count, duration):
 def set_led_value(value):
     	grovepi.analogWrite(led, int(value))
 
+def get_led_value():
+	try:
+		c = conn.cursor()
+		c.execute("SELECT [Value] FROM  PinValue WHERE Id=5")
+		result = c.fetchone()
+		ledValue = result["Value"]
+		if currentLedValue != ledValue:
+			currentLedValue = ledValue
+			set_led_value(ledValue)
+	except Error as e:
+		print(e)
+
 def detect_hit():
 	while True:
-		pinValue = os.getenv('PIN_VALUE', default_pinValue)
-		print(pinValue)
-		set_led_value(pinValue)
-		if pinValue == 255:
+		get_led_value()
+		if currentLedValue == 255:
 			distance = grovepi.ultrasonicRead(sensor)
 			if distance < 10:
-				set_led_value(0)
-				os.environ['PIN_VALUE'] = 0
 				report_hit()
 				print(distance)
 
 def report_hit():
+	set_led_value(0)   	
 	print("HIT!!!!")
 
 flash_led(10, .2)
