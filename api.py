@@ -1,5 +1,5 @@
 from flask import Flask
-import os
+import sqlite3
 
 app = Flask(__name__)
 
@@ -7,9 +7,15 @@ print(os.environ['HOME'])
 
 @app.route('/<pinValue>', methods=['POST'])
 def set_pin_value(pinValue):
-	print(type(pinValue))
-	os.environ['PIN_VALUE'] = pinValue
-	print(os.getenv('PIN_VALUE', 123))
+    try:
+		conn = sqlite3.connect("data.db")
+		c = conn.cursor()
+		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=?;", (pinValue, led))
+	except Error as e:
+		print(e)
+    finally:
+        conn.close()
+	
 	return pinValue
 
 app.run(host='0.0.0.0')
