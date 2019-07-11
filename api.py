@@ -10,6 +10,7 @@ def set_pin_value(pin, value):
 		conn = sqlite3.connect("data.db")
 		c = conn.cursor()
 		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=?;", (value, pin))
+		conn.commit()
 	except Error as e:
 		print(e)
 	finally:
