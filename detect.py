@@ -34,7 +34,7 @@ def get_led_value(currentLedValue):
 		print(e)
 
 def detect_hit():
-    currentLedValue = 0
+	currentLedValue = 0
 	while True:
 		currentLedValue = get_led_value(currentLedValue)
 		if currentLedValue == 255:
