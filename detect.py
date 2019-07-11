@@ -23,7 +23,7 @@ def set_led_value(value):
 def get_led_value():
 	try:
 		c = conn.cursor()
-		c.execute("SELECT [Value] FROM  PinValue WHERE Id=5")
+		c.execute("SELECT [Value] FROM  PinValue WHERE Id=5;")
 		result = c.fetchone()
 		ledValue = result["Value"]
 		if currentLedValue != ledValue:

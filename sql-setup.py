@@ -9,14 +9,10 @@ def create_connection(db_file):
         print(sqlite3.version)
 
         c = conn.cursor()
-        c.execute(""" CREATE TABLE IF NOT EXISTS PinValue (
-                                        Id integer PRIMARY KEY,
-                                        [Value] integer NOT NULL
-                                    ); """)
+        c.execute("CREATE TABLE IF NOT EXISTS PinValue (Id integer PRIMARY KEY, [Value] integer NOT NULL);")
 
         pinValue = (5, 255)
-        c.execute(""" INSERT INTO PinValue(Id, [Value])
-              VALUES(?,?) """, pinValue)
+        c.execute("INSERT INTO PinValue VALUES(?,?);", pinValue)
     except Error as e:
         print(e)
     finally:
