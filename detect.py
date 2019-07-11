@@ -7,7 +7,6 @@ led = 5
 sensor = 4
 
 grovepi.pinMode(led,"OUTPUT")
-conn = sqlite3.connect("data.db")
 
 def flash_led(count, duration):
 	for x in range(1, count):
@@ -20,19 +19,25 @@ def flash_led(count, duration):
 def set_led_value(newValue):
 	grovepi.analogWrite(led, int(newValue))
 	try:
+		conn = sqlite3.connect("data.db")
 		c = conn.cursor()
 		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=?;", (newValue, led))
 	except Error as e:
 		print(e)
+	finally:
+		conn.close()
 
 def get_led_value():
 	try:
+		conn = sqlite3.connect("data.db")
 		c = conn.cursor()
 		c.execute("SELECT [Value] FROM PinValue WHERE Id=?;", (led,))
 		result = c.fetchone()
 		return result[0]
 	except Error as e:
 		print(e)
+	finally:
+		conn.close()
 
 def detect_hit():
 	currentLedValue = 0
