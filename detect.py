@@ -38,8 +38,11 @@ def detect_hit():
 	currentLedValue = 0
 	while True:
 		newLedValue = get_led_value()
+		print("newLedValue: " + newLedValue)
+
 		if currentLedValue != newLedValue:
 			currentLedValue = newLedValue
+			print("LED VALUE CHANGED")
 
 		if currentLedValue == 255:
 			distance = grovepi.ultrasonicRead(sensor)
