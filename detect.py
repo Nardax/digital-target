@@ -38,7 +38,7 @@ def detect_hit():
 	currentLedValue = 0
 	while True:
 		newLedValue = get_led_value()
-		print("newLedValue: " + newLedValue)
+		print("newLedValue: " + str(newLedValue))
 
 		if currentLedValue != newLedValue:
 			currentLedValue = newLedValue
