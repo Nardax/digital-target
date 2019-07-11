@@ -4,7 +4,7 @@ from sqlite3 import Error
 
 app = Flask(__name__)
 
-@app.route('/<int:pin>/<int:value>', methods=['POST'])
+@app.route('/<int:pin>/<int:value>', methods=['PUT'])
 def set_pin_value(pin, value):
 	try:
 		conn = sqlite3.connect("data.db")
@@ -15,6 +15,6 @@ def set_pin_value(pin, value):
 	finally:
 		conn.close()
 	
-	return value
+	return str(value)
 
 app.run(host='0.0.0.0')
