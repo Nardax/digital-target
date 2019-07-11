@@ -3,19 +3,18 @@ import sqlite3
 from sqlite3 import Error
 
 app = Flask(__name__)
-led = 5 
 
-@app.route('/<pinValue>', methods=['POST'])
-def set_pin_value(pinValue):
+@app.route('<int:pin>/<int:value>', methods=['POST'])
+def set_pin_value(pin, value):
 	try:
 		conn = sqlite3.connect("data.db")
 		c = conn.cursor()
-		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=?;", (pinValue, led))
+		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=?;", (value, pin))
 	except Error as e:
 		print(e)
 	finally:
 		conn.close()
 	
-	return pinValue
+	return value
 
 app.run(host='0.0.0.0')
