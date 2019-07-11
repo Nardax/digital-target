@@ -11,32 +11,36 @@ conn = sqlite3.connect("data.db")
 
 def flash_led(count, duration):
 	for x in range(1, count):
-		set_led_value(255)
+		grovepi.analogWrite(led, 255)
 		time.sleep(duration)
-		set_led_value(0)
+		grovepi.analogWrite(led, 0)
 		time.sleep(duration)
+	set_led_value(0)
 
-def set_led_value(value):
-    	grovepi.analogWrite(led, int(value))
+def set_led_value(newValue):
+	grovepi.analogWrite(led, int(newValue))
+	try:
+		c = conn.cursor()
+		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=5;", newValue)
+	except Error as e:
+		print(e)
 
-def get_led_value(currentLedValue):
+def get_led_value():
 	try:
 		c = conn.cursor()
 		c.execute("SELECT [Value] FROM  PinValue WHERE Id=5;")
 		result = c.fetchone()
-		ledValue = result[0]
-		if currentLedValue != ledValue:
-			set_led_value(ledValue)
-			return ledValue
-		else:
-			return currentLedValue
+		return result[0]
 	except Error as e:
 		print(e)
 
 def detect_hit():
 	currentLedValue = 0
 	while True:
-		currentLedValue = get_led_value(currentLedValue)
+		newLedValue = get_led_value()
+		if currentLedValue != newLedValue:
+			currentLedValue = newLedValue
+
 		if currentLedValue == 255:
 			distance = grovepi.ultrasonicRead(sensor)
 			if distance < 10:
