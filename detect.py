@@ -6,8 +6,6 @@ from sqlite3 import Error
 led = 5 
 sensor = 4
 
-grovepi.pinMode(led,"OUTPUT")
-
 def flash_led(count, duration):
 	for x in range(1, count):
 		grovepi.analogWrite(led, 255)
@@ -16,23 +14,25 @@ def flash_led(count, duration):
 		time.sleep(duration)
 	set_led_value(0)
 
-def set_led_value(newValue):
-	grovepi.analogWrite(led, int(newValue))
+def set_led_value(value):
+	grovepi.analogWrite(led, int(value))
+
+def set_pin_value(pin, value):
 	try:
 		conn = sqlite3.connect("data.db")
 		c = conn.cursor()
-		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=?;", (newValue, led))
+		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=?;", (value, pin))
 		conn.commit()
 	except Error as e:
 		print(e)
 	finally:
 		conn.close()
 
-def get_led_value():
+def get_pin_value(pin):
 	try:
 		conn = sqlite3.connect("data.db")
 		c = conn.cursor()
-		c.execute("SELECT [Value] FROM PinValue WHERE Id=?;", (led,))
+		c.execute("SELECT [Value] FROM PinValue WHERE Id=?;", (pin,))
 		result = c.fetchone()
 		return result[0]
 	except Error as e:
@@ -41,24 +41,25 @@ def get_led_value():
 		conn.close()
 
 def detect_hit():
-	currentLedValue = 0
+	currentPinValue = 0
 	while True:
-		newLedValue = get_led_value()
-		print("newLedValue: " + str(newLedValue))
+		newPinValue = get_pin_value(led)
 
-		if currentLedValue != newLedValue:
-			currentLedValue = newLedValue
+		if currentPinValue != newPinValue:
+			currentPinValue = newPinValue
 			print("LED VALUE CHANGED")
 
-		if currentLedValue == 255:
+		if currentPinValue == 255:
 			distance = grovepi.ultrasonicRead(sensor)
 			if distance < 10:
 				report_hit()
 				print(distance)
 
 def report_hit():
+	set_pin_value(led, 0) 
 	set_led_value(0)   	
 	print("HIT!!!!")
 
+grovepi.pinMode(led,"OUTPUT")
 flash_led(10, .2)
 detect_hit()
