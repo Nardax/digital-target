@@ -18,4 +18,17 @@ def set_pin_value(pin, value):
 	
 	return str(value)
 
+@app.route('/<int:pin>', methods=['GET'])
+def get_pin_value(pin):
+	try:
+		conn = sqlite3.connect("data.db")
+		c = conn.cursor()
+		c.execute("SELECT [Value] FROM PinValue WHERE Id=?;", (pin,))
+		result = c.fetchone()
+		return str(result[0])
+	except Error as e:
+		print(e)
+	finally:
+		conn.close()
+
 app.run(host='0.0.0.0')
