@@ -21,14 +21,14 @@ def set_led_value(newValue):
 	grovepi.analogWrite(led, int(newValue))
 	try:
 		c = conn.cursor()
-		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=5;", newValue)
+		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=?;", (newValue, led))
 	except Error as e:
 		print(e)
 
 def get_led_value():
 	try:
 		c = conn.cursor()
-		c.execute("SELECT [Value] FROM  PinValue WHERE Id=5;")
+		c.execute("SELECT [Value] FROM PinValue WHERE Id=?;", (led))
 		result = c.fetchone()
 		return result[0]
 	except Error as e:
