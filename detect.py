@@ -7,10 +7,10 @@ led = 5
 sensor = 4
 
 def flash_led(count, duration):
-	for x in range(1, count):
-		grovepi.analogWrite(led, 255)
+    for x in range(1, count):
+		set_led_value(0)
 		time.sleep(duration)
-		grovepi.analogWrite(led, 0)
+		set_led_value(255)
 		time.sleep(duration)
 	set_led_value(0)
 
