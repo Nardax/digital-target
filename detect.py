@@ -7,7 +7,7 @@ led = 5
 sensor = 4
 
 def flash_led(count, duration):
-    for x in range(1, count):
+	for x in range(1, count):
 		set_led_value(0)
 		time.sleep(duration)
 		set_led_value(255)
