@@ -47,6 +47,7 @@ def detect_hit():
 
 		if currentPinValue != newPinValue:
 			currentPinValue = newPinValue
+			set_led_value(currentPinValue)
 			print("LED VALUE CHANGED")
 
 		if currentPinValue == 255:
