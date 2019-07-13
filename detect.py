@@ -2,6 +2,7 @@ import grovepi
 import time
 import sqlite3
 from sqlite3 import Error
+import http.client
 
 led = 5 
 sensor = 4
@@ -52,13 +53,17 @@ def detect_hit():
 
 		if currentPinValue == 255:
 			distance = grovepi.ultrasonicRead(sensor)
-			if distance < 10:
+			if distance > 2 and distance < 10:
 				report_hit()
 				print(distance)
 
 def report_hit():
 	set_pin_value(led, 0) 
-	set_led_value(0)   	
+	set_led_value(0)
+	conn = http.client.HTTPConnection("http://192.168.1.250", 5000)
+	conn.request("PUT", "/0")
+	conn.getresponse()
+	conn.close()
 	print("HIT!!!!")
 
 grovepi.pinMode(led,"OUTPUT")

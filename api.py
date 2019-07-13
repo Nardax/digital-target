@@ -31,4 +31,8 @@ def get_pin_value(pin):
 	finally:
 		conn.close()
 
+@app.route('/<int:pin>', methods=['PUT'])
+def record_hit(pin):
+	print("HIT!!! - " + str(pin))
+
 app.run(host='0.0.0.0')
