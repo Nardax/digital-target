@@ -60,7 +60,7 @@ def detect_hit():
 def report_hit():
 	set_pin_value(led, 0) 
 	set_led_value(0)
-	conn = http.client.HTTPConnection("http://192.168.1.250:5000")
+	conn = http.client.HTTPConnection("192.168.1.250", 5000)
 	conn.set_debuglevel(1)
 	conn.request("POST", "/5")
 	response = conn.getresponse()
