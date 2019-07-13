@@ -34,6 +34,6 @@ def get_pin_value(pin):
 @app.route('/<int:pin>', methods=['POST'])
 def record_hit(pin):
 	print("HIT!!! - " + str(pin))
-	return None
+	return str(pin)
 
 app.run(host='0.0.0.0')
