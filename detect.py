@@ -63,8 +63,6 @@ def report_hit():
 	conn = http.client.HTTPConnection("192.168.1.250", 5000)
 	conn.set_debuglevel(1)
 	conn.request("POST", "/5")
-	response = conn.getresponse()
-	print (response.code + " " + response.reason)
 	conn.close()
 	print("HIT!!!!")
 
