@@ -1,0 +1,14 @@
+/Users/ryanpedersen/repos/digital-target/game-master/bin/Debug/netcoreapp2.2/game-master.deps.json
+/Users/ryanpedersen/repos/digital-target/game-master/bin/Debug/netcoreapp2.2/game-master.runtimeconfig.json
+/Users/ryanpedersen/repos/digital-target/game-master/bin/Debug/netcoreapp2.2/game-master.runtimeconfig.dev.json
+/Users/ryanpedersen/repos/digital-target/game-master/bin/Debug/netcoreapp2.2/game-master.dll
+/Users/ryanpedersen/repos/digital-target/game-master/bin/Debug/netcoreapp2.2/game-master.pdb
+/Users/ryanpedersen/repos/digital-target/game-master/obj/Debug/netcoreapp2.2/game-master.csprojAssemblyReference.cache
+/Users/ryanpedersen/repos/digital-target/game-master/obj/Debug/netcoreapp2.2/game-master.csproj.CoreCompileInputs.cache
+/Users/ryanpedersen/repos/digital-target/game-master/obj/Debug/netcoreapp2.2/game-master.RazorAssemblyInfo.cache
+/Users/ryanpedersen/repos/digital-target/game-master/obj/Debug/netcoreapp2.2/game-master.RazorAssemblyInfo.cs
+/Users/ryanpedersen/repos/digital-target/game-master/obj/Debug/netcoreapp2.2/game-master.AssemblyInfoInputs.cache
+/Users/ryanpedersen/repos/digital-target/game-master/obj/Debug/netcoreapp2.2/game-master.AssemblyInfo.cs
+/Users/ryanpedersen/repos/digital-target/game-master/obj/Debug/netcoreapp2.2/game-master.RazorTargetAssemblyInfo.cache
+/Users/ryanpedersen/repos/digital-target/game-master/obj/Debug/netcoreapp2.2/game-master.dll
+/Users/ryanpedersen/repos/digital-target/game-master/obj/Debug/netcoreapp2.2/game-master.pdb

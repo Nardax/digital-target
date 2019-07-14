@@ -1,30 +1,34 @@
 class Target:
     def __init__(self, name):
-        self.name = name
-        self.isHit = False
-        self.isLit = False
+        self._name = name
+        self._isHit = False
+        self._isLit = False
 
-    def get_name(self):
-        return self.name
+    def reset(self):
+        self._isHit = False
+        self._isLit = False
+
+    @property
+    def name(self):
+        return self._name
     
-    def set_name(self, value):
-        self.name = value
+    @name.setter
+    def name(self, value):
+        self._name = value
 
-    name = property(get_name, set_name)
+    @property
+    def isHit(self):
+        return self._isHit
 
-    def get_isHit(self):
-        return self.isHit
+    @isHit.setter
+    def isHit(self, value):
+        self._isHit = value
 
-    def set_isHit(self, value):
-        self.isHit = value
+    @property
+    def isLit(self):
+        return self._isLit
 
-    isHit = property(get_isHit, set_isHit)
-
-    def get_isLit(self):
-        return self.isLit
-
-    def set_isLit(self, value):
-        self.isLit = value
-
-    isLit = property(get_isLit, set_isLit)
+    @isLit.setter
+    def isLit(self, value):
+        self._isLit = value
 

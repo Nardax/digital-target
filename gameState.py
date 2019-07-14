@@ -3,7 +3,6 @@ import time
 
 class GameState:
     def __init__(self):
-        self.isComplete = False
         self.shots = 0
         self.targets = []
         self.hits = 0
@@ -14,34 +13,26 @@ class GameState:
             target = Target('t' + str(i+1))
             self.targets.append(target)
 
-    def get_shots(self):
-        return self.shots
-    
-    def set_shots(self, value):
-        self.shots = value
+    def reset(self):
+        self.shots = 0
+        self.hits = 0
+        self.start = time.time()
+        
+        for t in self.targets:
+            t.reset
 
-    shots = property(get_shots, set_shots)
+    @property
+    def allTargetsHit(self):
+        for t in self.targets:
+            if t.isHit == False:
+                return False
+        
+        return True
 
-    def get_targets(self):
-        return self.targets
-    
-    def set_targets(self, value):
-        self.targets = value
-
-    targets = property(get_targets, set_targets)
-
-    def get_hits(self):
-        return self.hits
-
-    def set_hits(self, value):
-        self.hits = value
+    @property
+    def isComplete(self):
         print(self.hits, self.shots)
-
-        if self.hits == self.shots:
-            self.isComplete = True
-            self.end = time.time()
-
-    hits = property(get_hits, set_hits)
+        return (self.hits >= self.shots)
 
     def get_durration(self):
         value = self.end - self.start

@@ -3,10 +3,11 @@ import time
 import sqlite3
 from sqlite3 import Error
 import http.client
+import socket
 
 led = 5 
 sensor = 4
-target = "0"
+target = socket.gethostname()
 
 def flash_led(count, duration):
 	for x in range(1, count):
@@ -63,7 +64,7 @@ def report_hit():
 	set_led_value(0)
 	conn = http.client.HTTPConnection("192.168.1.37", 5000)
 	conn.set_debuglevel(1)
-	conn.request("POST", "/" + target)
+	conn.request("POST", "/games/" + target[1])
 	conn.close()
 	print("HIT!!!!")
 
