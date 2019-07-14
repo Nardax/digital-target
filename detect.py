@@ -6,6 +6,7 @@ import http.client
 
 led = 5 
 sensor = 4
+target = 0
 
 def flash_led(count, duration):
 	for x in range(1, count):
@@ -60,9 +61,9 @@ def detect_hit():
 def report_hit():
 	set_pin_value(led, 0) 
 	set_led_value(0)
-	conn = http.client.HTTPConnection("192.168.1.250", 5000)
+	conn = http.client.HTTPConnection("192.168.1.37", 5000)
 	conn.set_debuglevel(1)
-	conn.request("POST", "/5")
+	conn.request("POST", "/" + target)
 	conn.close()
 	print("HIT!!!!")
 
