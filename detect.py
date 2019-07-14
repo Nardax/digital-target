@@ -6,7 +6,7 @@ import http.client
 
 led = 5 
 sensor = 4
-target = 0
+target = "0"
 
 def flash_led(count, duration):
 	for x in range(1, count):

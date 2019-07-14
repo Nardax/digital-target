@@ -18,7 +18,7 @@ def run_on_off_game(game):
 def turn_target_on(target):
     conn = http.client.HTTPConnection(target.name, 5000)
     conn.set_debuglevel(1)
-    conn.request("POST", "/5/255")
+    conn.request("PUT", "/5/255")
     conn.close()
     target.isLit = True
     return
@@ -26,7 +26,7 @@ def turn_target_on(target):
 def turn_target_off(target):
     conn = http.client.HTTPConnection(target.name, 5000)
     conn.set_debuglevel(1)
-    conn.request("POST", "/5/0")
+    conn.request("PUT", "/5/0")
     conn.close()
     target.isLit = False
     target.isHit = False
