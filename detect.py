@@ -22,7 +22,7 @@ def set_led_value(value):
 
 def set_pin_value(pin, value):
 	try:
-		conn = sqlite3.connect("data.db")
+		conn = sqlite3.connect("/home/pi/repos/digital-target/data.db")
 		c = conn.cursor()
 		c.execute("UPDATE PinValue SET [Value]=? WHERE Id=?;", (value, pin))
 		conn.commit()
@@ -33,7 +33,7 @@ def set_pin_value(pin, value):
 
 def get_pin_value(pin):
 	try:
-		conn = sqlite3.connect("data.db")
+		conn = sqlite3.connect("/home/pi/repos/digital-target/data.db")
 		c = conn.cursor()
 		c.execute("SELECT [Value] FROM PinValue WHERE Id=?;", (pin,))
 		result = c.fetchone()
