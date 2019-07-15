@@ -19,4 +19,4 @@ def create_connection(db_file):
         conn.close()
  
 if __name__ == '__main__':
-    create_connection("~/repos/digital-target/data.db")
+    create_connection("/home/pi/repos/digital-target/data.db")
