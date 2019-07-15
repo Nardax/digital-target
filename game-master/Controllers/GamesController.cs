@@ -15,7 +15,7 @@ namespace game_master.Controllers
         [HttpPost]
         public void Post([FromBody] Game game)
         {
-            Console.Write(game.Kind);
+            Console.WriteLine($"\n\n\n{game.Kind}\n\n\n");
             var factory = new GameStateFactory();
             _gameState = factory.CreateGameState(game);
             _gameState.Start();
@@ -29,7 +29,7 @@ namespace game_master.Controllers
 
             if (_gameState.IsComplete)
             {
-                Console.WriteLine($"GAME OVER - {_gameState.TotalGameTime}");
+                Console.WriteLine($"\n\n\nGAME OVER - {_gameState.TotalGameTime}\n\n\n");
                 return;
             }
 

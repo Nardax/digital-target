@@ -19,7 +19,7 @@ public class Target
         var response = await _httpClient.PutAsync($"http://{Name}:5000/5/255", null);
         if (!response.IsSuccessStatusCode)
         {
-            Console.WriteLine("Activation request failed.");
+            Console.WriteLine("\n\n\nActivation request failed.\n\n\n");
         }
     }
 
@@ -29,7 +29,7 @@ public class Target
         var response = await _httpClient.PutAsync($"http://{Name}:5000/5/0", null);
         if (!response.IsSuccessStatusCode)
         {
-            Console.WriteLine("Deactivation request failed.");
+            Console.WriteLine("\n\n\nDeactivation request failed.\n\n\n");
         }
     }
 

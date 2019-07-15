@@ -1,24 +1,48 @@
+using System;
 using System.Threading.Tasks;
 
 namespace game_master.Controllers
 {
     public class DirectionalGameState : GameState
     {
-        private Game game;
+        private Direction _direction;
+        private int _currentTarget;
 
         public DirectionalGameState(Game game) : base(game)
+        { 
+            _direction = game.Direction;
+        }
+
+        public override async Task Start()
         {
-            this.game = game;
+            await base.Start();
+
+            switch (_direction)
+            {
+                case Direction.LeftToRight:
+                    _currentTarget = 4;
+                    break;
+                case Direction.RightToLeft:
+                    _currentTarget = 0;
+                    break;
+            }
+            
+            await LightNextTarget();
         }
 
         public override async Task LightNextTarget()
         {
-            throw new System.NotImplementedException();
-        }
+            switch (_direction)
+            {
+                case Direction.LeftToRight:
+                    _currentTarget = (_currentTarget >= 4) ? 0 : (_currentTarget + 1);
+                    break;
+                case Direction.RightToLeft:
+                    _currentTarget = (_currentTarget <= 0) ? 4 : (_currentTarget - 1);
+                    break;
+            }
 
-        public override Task Start()
-        {
-            throw new System.NotImplementedException();
+            await Targets[_currentTarget].Activate();
         }
     }
 }

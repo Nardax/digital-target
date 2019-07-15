@@ -10,7 +10,8 @@ namespace game_master.Controllers
 
         public override async Task Start()
         {
-            StartDateTime = DateTime.UtcNow;
+            await base.Start();
+            
             await ActivateAllTargets();
         }
 

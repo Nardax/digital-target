@@ -15,11 +15,19 @@ public abstract class GameState
         }
     }
 
-    public abstract Task Start();
+    public virtual async Task Start()
+    {
+        StartDateTime = DateTime.UtcNow;
+
+        foreach (var target in Targets)
+        {
+            await target.Deactivate();
+        }
+    }
 
     public void RecordHit(int targetId)
     {
-        Console.WriteLine($"HIT!!! - {targetId}");
+        Console.WriteLine($"\n\n\nHIT!!! - {targetId}\n\n\n");
 
         Targets[targetId].IsHit = true;
         Hits += 1;
